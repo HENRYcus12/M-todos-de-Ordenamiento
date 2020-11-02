@@ -1,0 +1,43 @@
+#include "Tipos_Ordenamiento.cpp"
+
+int main(){
+    clsOrdenamiento ob1;
+    int arreglo1[] = {3, 2, 5, 1, 7};
+    float arreglo2[] = {2.5, 2.3, 2.7, 2.1, 1.9};
+
+/*desmarcar el puntero rediriga al metodo de ordenamiento a desear
+     
+    Ejemplo:
+    ob1.burbuja(arreglo1, 5);
+    ob1.burbuja(arreglo2, 5);
+  */  
+
+    //ob1.burbuja(arreglo1, 5);
+    //ob1.burbuja(arreglo2, 5);
+
+    //ob1.insercion(arreglo1, 5);
+    //ob1.insercion(arreglo2, 5);
+
+    //ob1.seleccion(arreglo1, 5);
+    //ob1.seleccion(arreglo2, 5);
+
+    //ob1.mezcla(arreglo1, 0, 5);
+    //ob1.mezcla(arreglo2, 0, 5);
+
+    //ob1.shell(arreglo1, 5);
+    //ob1.shell(arreglo2, 5);
+
+    //ob1.quick(arreglo1, 0, 4);
+    //ob1.quick(arreglo2, 0, 4);
+
+// se imprime los datos ordenados de acuerdo al método de ordenamiento
+
+    printf("Elementos enteros:\n\n");
+    for(int i = 0; i < 5; i++)
+        printf("Elemento %d: %d\n", i, arreglo1[i]);
+
+    printf("\n\nElementos flotantes:\n\n");
+    for(int j = 0; j < 5; j++)
+        printf("Elemento %d: %f\n", j, arreglo2[j]);
+    return 0;
+}
