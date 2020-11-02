@@ -1,0 +1,269 @@
+#include <iostream>
+#include <stdio.h>
+#include <conio.h>
+#include <math.h>
+
+using namespace std;
+ //se representan los diferentes tipos de ordenamiento
+class clsOrdenamiento
+{
+    public:
+        clsOrdenamiento();
+        void burbuja(int arreglo[], int nElementos);
+        void burbuja(float arreglo[], int nElementos);
+        void insercion(int arreglo[], int nElementos);
+        void insercion(float arreglo[], int nElementos);
+        void seleccion(int arreglo[], int nElementos);
+        void seleccion(float arreglo[], int nElementos);
+        void mezcla(int arreglo[], int inicio, int nElementos);
+        void mezcla(float arreglo[], int inicio, int nElementos);
+        void shell(int arreglo[], int nElementos);
+        void shell(float arreglo[], int nElementos);
+        void quick(int arreglo[], int inicio, int limite);
+        void quick(float arreglo[], int inicio, int limite);
+    private:
+        void algoritmoMezcla(int arreglo[], int inicio, int n1, int n2);
+        void algoritmoMezcla(float arreglo[], int inicio, int n1, int n2);
+};
+
+clsOrdenamiento :: clsOrdenamiento()
+{
+}
+
+//Método de ordenamiento burbuja
+void clsOrdenamiento :: burbuja(int arreglo[], int nElementos){
+    int temp;
+
+    for(int i = 1; i < nElementos; i++){
+        for(int j = 0; j < nElementos - 1; j++){
+            if(arreglo[j] > arreglo[j+1]){
+                temp = arreglo[j];
+                arreglo[j] = arreglo[j+1];
+                arreglo[j+1] = temp;
+            }
+        }
+    }
+}
+
+void clsOrdenamiento :: burbuja(float arreglo[], int nElementos){
+    float temp;
+
+    for(int i = 1; i < nElementos; i++){
+        for(int j = 0; j < nElementos - 1; j++){
+            if(arreglo[j] > arreglo[j+1]){
+                temp = arreglo[j];
+                arreglo[j] = arreglo[j+1];
+                arreglo[j+1] = temp;
+            }
+        }
+    }
+}
+
+//Método de ordenamiento insercion
+void clsOrdenamiento :: insercion(int arreglo[], int nElementos){
+    int i, j;
+    int temp;
+
+    for(i = 1; i < nElementos; i++){
+        temp = arreglo[i];
+        j = i - 1;
+        while((arreglo[j] > temp) && (j >= 0)){
+            arreglo[j+1] = arreglo[j];
+            j--;
+        }
+        arreglo[j+1] = temp;
+    }
+}
+
+void clsOrdenamiento :: insercion(float arreglo[], int nElementos){
+    int i, j;
+    float temp;
+
+    for(i = 1; i < nElementos; i++){
+        temp = arreglo[i];
+        j = i - 1;
+        while((arreglo[j] > temp) && (j >= 0)){
+            arreglo[j+1] = arreglo[j];
+            j--;
+        }
+        arreglo[j+1] = temp;
+    }
+}
+
+//Método de ordenamiento seleccion
+void clsOrdenamiento :: seleccion(int arreglo[], int nElementos){
+    int i, j, p;
+    int temp;
+
+    for(i = 0; i < (nElementos-1); i++){
+        p = i;
+        for(j = i + 1; j <= (nElementos-1); j++)
+            if(arreglo[j] < arreglo[p]) p = j;
+        if(p != i){
+            temp = arreglo[p];
+            arreglo[p] = arreglo[i];
+            arreglo[i] = temp;
+        }
+    }
+}
+
+void clsOrdenamiento :: seleccion(float arreglo[], int nElementos){
+    int i, j, p;
+    float temp;
+
+    for(i = 0; i < (nElementos-1); i++){
+        p = i;
+        for(j = i + 1; j <= (nElementos-1); j++)
+            if(arreglo[j] < arreglo[p]) p = j;
+        if(p != i){
+            temp = arreglo[p];
+            arreglo[p] = arreglo[i];
+            arreglo[i] = temp;
+        }
+    }
+}
+
+//Método de ordenamiento mezcla
+void clsOrdenamiento :: mezcla(int arreglo[], int inicio, int nElementos){
+    int n1, n2;
+
+    if(nElementos > 1){
+        n1 = nElementos / 2;
+        n2 = nElementos - n1;
+        mezcla(arreglo, inicio, n1);
+        mezcla(arreglo, inicio + n1, n2);
+        algoritmoMezcla(arreglo, inicio, n1, n2);
+    }
+}
+
+void clsOrdenamiento :: algoritmoMezcla(int arreglo[], int inicio, int n1, int n2){
+    int buffer[n1 + n2];
+    int temp = 0;
+    int temp1 = 0;
+    int temp2 = 0;
+    int i;
+
+    while((temp1 < n1) && (temp2 < n2)){
+        if(arreglo[inicio + temp1] < arreglo[inicio + n1 + temp2])
+            buffer[temp++] = arreglo[inicio + (temp1++)];
+        else
+            buffer[temp++] = arreglo[inicio + n1 + (temp2++)];
+    }
+    while(temp1 < n1)
+        buffer[temp++] = arreglo[inicio + (temp1++)];
+    while(temp2 < n2)
+        buffer[temp++] = arreglo[inicio + n1 + (temp2++)];
+    for(i = 0; i < n1 + n2; i++)
+        arreglo[inicio + i] = buffer[i];
+}
+
+void clsOrdenamiento :: mezcla(float arreglo[], int inicio, int nElementos){
+    int n1, n2;
+
+    if(nElementos > 1){
+        n1 = nElementos / 2;
+        n2 = nElementos - n1;
+        mezcla(arreglo, inicio, n1);
+        mezcla(arreglo, inicio + n1, n2);
+        algoritmoMezcla(arreglo, inicio, n1, n2);
+    }
+}
+
+void clsOrdenamiento :: algoritmoMezcla(float arreglo[], int inicio, int n1, int n2){
+    float buffer[n1 + n2];
+    int temp = 0;
+    int temp1 = 0;
+    int temp2 = 0;
+    int i;
+
+    while((temp1 < n1) && (temp2 < n2)){
+        if(arreglo[inicio + temp1] < arreglo[inicio + n1 + temp2])
+            buffer[temp++] = arreglo[inicio + (temp1++)];
+        else
+            buffer[temp++] = arreglo[inicio + n1 + (temp2++)];
+    }
+    while(temp1 < n1)
+        buffer[temp++] = arreglo[inicio + (temp1++)];
+    while(temp2 < n2)
+        buffer[temp++] = arreglo[inicio + n1 + (temp2++)];
+    for(i = 0; i < n1 + n2; i++)
+        arreglo[inicio + i] = buffer[i];
+}
+
+//Método de ordenamiento shellsort
+void clsOrdenamiento :: shell(int arreglo[], int nElementos){
+    int temp;
+
+    for(int incremento = nElementos/2; incremento > 0; incremento = (incremento == 2 ? 1 : (int) round(incremento/2.2))){
+        for(int i = incremento; i < nElementos; i++){
+            for(int j = i; j >= incremento && arreglo[j-incremento] > arreglo[j]; j-=incremento){
+                temp = arreglo[j];
+                arreglo[j] = arreglo[j-incremento];
+                arreglo[j-incremento] = temp;
+            }
+        }
+    }
+}
+
+void clsOrdenamiento :: shell(float arreglo[], int nElementos){
+    float temp;
+
+    for(int incremento = nElementos/2; incremento > 0; incremento = (incremento == 2 ? 1 : (int) round(incremento/2.2))){
+        for(int i = incremento; i < nElementos; i++){
+            for(int j = i; j >= incremento && arreglo[j-incremento] > arreglo[j]; j-=incremento){
+                temp = arreglo[j];
+                arreglo[j] = arreglo[j-incremento];
+                arreglo[j-incremento] = temp;
+            }
+        }
+    }
+}
+
+//Método de ordenamiento quicksort
+void clsOrdenamiento :: quick(int arreglo[], int inicio, int limite){
+    int i = 0, j = 0;
+    int pivote = 0, temp = 0;
+    i = inicio;
+    j = limite;
+    pivote = arreglo [(inicio + limite)/2];
+    do{
+        while((arreglo[i] < pivote) && (j <= limite)){
+               i++;}
+        while((pivote < arreglo[j]) && (j > inicio)){
+               j--;}
+        if( i <= j ){
+            temp = arreglo[i];
+            arreglo[i] = arreglo[j];
+            arreglo[j] = temp;
+            i++;  j--;
+        }
+    }while( i <= j );
+    if( inicio < j )
+        quick( arreglo, inicio, j );
+    if( i < limite )
+        quick( arreglo, i, limite );
+}
+
+void clsOrdenamiento :: quick(float arreglo[], int inicio, int limite){
+    int i = 0, j = 0;
+    float pivote = 0, temp = 0;
+    i = inicio;
+    j = limite;
+    pivote = arreglo [(inicio + limite)/2];
+    do{
+        while((arreglo[i] < pivote) && (j <= limite)){
+               i++;}
+        while((pivote < arreglo[j]) && (j > inicio)){
+               j--;}
+        if( i <= j ){
+            temp = arreglo[i];
+            arreglo[i] = arreglo[j];
+            arreglo[j] = temp;
+            i++;  j--;
+        }
+    }while( i <= j );
+    if( inicio < j )
+        quick( arreglo, inicio, j );
+    if( i < limite )
+        quick( arreglo, i, limite );
+}
